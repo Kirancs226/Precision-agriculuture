@@ -5,7 +5,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
+
     weather = get_weather("Chennai")
+
     return render_template("index.html", weather=weather)
 
 if __name__ == "__main__":
