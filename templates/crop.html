@@ -1,0 +1,25 @@
+<h1>🌾 Crop Recommendation</h1>
+
+<form method="POST">
+
+Nitrogen: <input type="number" name="nitrogen"><br><br>
+
+Phosphorus: <input type="number" name="phosphorus"><br><br>
+
+Potassium: <input type="number" name="potassium"><br><br>
+
+Temperature: <input type="number" step="any" name="temperature"><br><br>
+
+Humidity: <input type="number" step="any" name="humidity"><br><br>
+
+pH: <input type="number" step="any" name="ph"><br><br>
+
+Rainfall: <input type="number" step="any" name="rainfall"><br><br>
+
+<button type="submit">Predict Crop</button>
+
+</form>
+
+{% if result %}
+<h2>Recommended Crop: {{ result }}</h2>
+{% endif %}
