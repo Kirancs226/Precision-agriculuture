@@ -21,6 +21,6 @@ model = RandomForestClassifier()
 model.fit(X_train, y_train)
 
 # Save model
-pickle.dump(model, open("crop_model.pkl", "wb"))
+pickle.dump(model, open("models/crop_model.pkl", "wb"))
 
 print("Crop model trained successfully")
