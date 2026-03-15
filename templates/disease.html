@@ -1,0 +1,17 @@
+<h1>🍃 Plant Disease Detection</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+Upload Leaf Image:
+
+<input type="file" name="image">
+
+<br><br>
+
+<button type="submit">Detect Disease</button>
+
+</form>
+
+{% if result %}
+<h2>{{ result }}</h2>
+{% endif %}

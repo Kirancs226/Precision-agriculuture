@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>Precision Agriculture</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 
 <body>
 
-<h1>🌱 Smart Precision Agriculture System</h1>
+<h1 class="title">🌱 Smart Precision Agriculture System</h1>
 
 <p>Welcome to the AI Farming Dashboard</p>
+
+<div class="container">
+
+<div class="card">
+
+<h2>📍 Enter Farm Location</h2>
+
+<form method="POST">
+
+<input type="text" name="city" placeholder="Enter City" required>
+
+<br><br>
+
+<button type="submit">Get Weather</button>
+
+</form>
+
+</div>
+
+{% if weather %}
+
+<div class="card">
 
 <h2>🌦 Weather Information</h2>
 
@@ -17,13 +44,35 @@
 <p>Wind Speed: {{ weather.wind_speed }} m/s</p>
 <p>Condition: {{ weather.description }}</p>
 
-<h2>Services</h2>
+</div>
 
-<ul>
-<li><a href="/crop">Crop Recommendation</a></li>
-<li><a href="/disease">Disease Detection</a></li>
-<li><a href="/fertilizer">Fertilizer Recommendation</a></li>
-</ul>
+{% endif %}
+
+<div class="card">
+
+<h2>🌾 Crop Recommendation</h2>
+
+<a href="/crop">Open Tool</a>
+
+</div>
+
+<div class="card">
+
+<h2>🍃 Disease Detection</h2>
+
+<a href="/disease">Upload Leaf</a>
+
+</div>
+
+<div class="card">
+
+<h2>🌿 Fertilizer Recommendation</h2>
+
+<a href="/fertilizer">Open Tool</a>
+
+</div>
+
+</div>
 
 </body>
 </html>

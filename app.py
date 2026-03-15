@@ -1,13 +1,25 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect, url_for
 from services.weather_service import get_weather
 from services.crop_service import predict_crop
 
+
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
 
-    weather = get_weather("Chennai")
+    if request.method == "POST":
+
+        city = request.form["city"]
+
+        # redirect to clean URL
+        return redirect(url_for("home", city=city))
+
+    city = request.args.get("city")
+    weather = None
+
+    if city:
+        weather = get_weather(city)
 
     return render_template("index.html", weather=weather)
 
@@ -33,6 +45,28 @@ def crop():
 
     return render_template("crop.html", result=result)
 
+
+
+
+
+@app.route("/disease", methods=["GET", "POST"])
+def disease():
+    
+    result = None
+
+    if request.method == "POST":
+        
+        file = request.files["image"]
+
+        filepath = "satic/uploads/" + file.filename
+        file.save(filepath)
+
+        #
+        #
+
+        result = "Prediction comming soon"
+
+    return render_template("disease.html", result=result)
 
 if __name__ == "__main__":
     app.run(debug=True)
