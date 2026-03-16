@@ -49,24 +49,40 @@ def crop():
 
 
 
+from services.disease_service import predict_disease
+
+from werkzeug.utils import secure_filename
+import os
+
 @app.route("/disease", methods=["GET", "POST"])
 def disease():
-    
+
     result = None
 
     if request.method == "POST":
-        
+
         file = request.files["image"]
 
-        filepath = "satic/uploads/" + file.filename
-        file.save(filepath)
+        filename = secure_filename(file.filename)
 
-        #
-        #
+        upload_folder = "static/uploads"
 
-        result = "Prediction comming soon"
+        path = os.path.join(upload_folder, filename)
+
+        file.save(path)
+
+        result = predict_disease(path)
+
+        print("Prediction:", result)
 
     return render_template("disease.html", result=result)
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

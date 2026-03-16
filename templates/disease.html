@@ -2,9 +2,7 @@
 
 <form method="POST" enctype="multipart/form-data">
 
-Upload Leaf Image:
-
-<input type="file" name="image">
+<input type="file" name="image" required>
 
 <br><br>
 
@@ -12,6 +10,8 @@ Upload Leaf Image:
 
 </form>
 
-{% if result %}
-<h2>{{ result }}</h2>
+{% if result is not none %}
+
+<h2>Prediction: {{ result }}</h2>
+
 {% endif %}

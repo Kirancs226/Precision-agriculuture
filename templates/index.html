@@ -44,9 +44,13 @@
 <p>Wind Speed: {{ weather.wind_speed }} m/s</p>
 <p>Condition: {{ weather.description }}</p>
 
-</div>
+<canvas id="weatherChart"></canvas>
 
 {% endif %}
+
+</div>
+
+
 
 <div class="card">
 
@@ -73,6 +77,56 @@
 </div>
 
 </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% if weather %}
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    var ctx = document.getElementById("weatherChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+
+        data: {
+            labels: ["Temperature", "Humidity", "Wind Speed"],
+
+            datasets: [{
+                label: "Weather Data",
+
+                data: [
+                    {{ weather.temperature }},
+                    {{ weather.humidity }},
+                    {{ weather.wind_speed }}
+                ],
+
+                backgroundColor: [
+                    "rgba(255,99,132,0.6)",
+                    "rgba(54,162,235,0.6)",
+                    "rgba(75,192,192,0.6)"
+                ]
+            }]
+        },
+
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+
+    });
+
+});
+
+</script>
+
+{% endif %}  
 
 </body>
 </html>
